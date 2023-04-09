@@ -6,7 +6,10 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 #airlines is a table
-#airports, countries, planes, routes
+#airports has co-ordinates
+#countries is a table
+#planes is a table
+#routes is weird
 
 """
 # Welcome to Streamlit!
@@ -18,9 +21,10 @@ forums](https://discuss.streamlit.io).
 
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
-airlines = pd.read_csv('airports.dat')
-airlines
-
+t = pd.read_csv('airlines.dat')
+t
+r = pd.read_csv('airports.dat')
+r
 q = pd.read_csv('countries.dat')
 q
 w = pd.read_csv('planes.dat')
