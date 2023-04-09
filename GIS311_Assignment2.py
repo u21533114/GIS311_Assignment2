@@ -10,7 +10,7 @@ import numpy as np
 #planes is a table with no header row
 #routes is weird and has no header row
 #NB: 1 map and two charts are needed
-
+pip install --upgrade streamlit
 st.markdown(
     """
     <style>
