@@ -10,11 +10,10 @@ import numpy as np
 #countries is a table
 #planes is a table with no header row
 #routes is weird and has no header row
+#NB: 1 map and two charts are needed
 
-"""
-# Flight Data Anaylsis \U00002708
-This data was aquired from [OpenFlights](https://openflights.org/data.html)
-"""
+""" # Flight Data Anaylsis \U00002708
+This data was aquired from [OpenFlights](https://openflights.org/data.html) """
 
 airlines = pd.read_csv('airlines.dat')
 airlines
