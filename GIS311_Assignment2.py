@@ -6,23 +6,23 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 #airlines is a table
-#airports has co-ordinates
+#airports has co-ordinates and no header row
 #countries is a table
-#planes is a table
-#routes is weird
+#planes is a table with no header row
+#routes is weird and has no header row
 
 """
 # Flight Data Anaylsis \U00002708
 This data was aquired from [OpenFlights](https://openflights.org/data.html)
 """
 
-t = pd.read_csv('airlines.dat')
-t
-r = pd.read_csv('airports.dat')
-r
-q = pd.read_csv('countries.dat')
-q
-w = pd.read_csv('planes.dat')
-w
-e = pd.read_csv('routes.dat')
-e
+airlines = pd.read_csv('airlines.dat')
+airlines
+airports = pd.read_csv('airports.dat')
+airports
+countries = pd.read_csv('countries.dat')
+countries
+planes = pd.read_csv('planes.dat')
+planes
+routes = pd.read_csv('routes.dat')
+routes
