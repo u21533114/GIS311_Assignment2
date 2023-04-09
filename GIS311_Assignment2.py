@@ -12,15 +12,10 @@ import numpy as np
 #routes is weird
 
 """
-# Welcome to Streamlit!
-
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:
-
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
-
-In the meantime, below is an example of what you can do with just a few lines of code:
+# Flight Data Anaylsis :plane:
+This data was aquired from [OpenFlights]((https://openflights.org/data.html)
 """
+
 t = pd.read_csv('airlines.dat')
 t
 r = pd.read_csv('airports.dat')
@@ -31,4 +26,3 @@ w = pd.read_csv('planes.dat')
 w
 e = pd.read_csv('routes.dat')
 e
-
