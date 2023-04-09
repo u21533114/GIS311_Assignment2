@@ -13,7 +13,7 @@ import numpy as np
 
 """
 # Flight Data Anaylsis :plane:
-This data was aquired from [OpenFlights]((https://openflights.org/data.html)
+This data was aquired from [OpenFlights](https://openflights.org/data.html)
 """
 
 t = pd.read_csv('airlines.dat')
