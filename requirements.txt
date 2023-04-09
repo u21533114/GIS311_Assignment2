@@ -2,4 +2,3 @@ geopandas
 pandas
 numpy
 streamlit
-altair
