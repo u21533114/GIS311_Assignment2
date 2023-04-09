@@ -16,4 +16,5 @@ forums](https://discuss.streamlit.io).
 
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
-pd.read_csv('airlines.dat')
+airlines = pd.read_csv('airlines.dat')
+airlines
