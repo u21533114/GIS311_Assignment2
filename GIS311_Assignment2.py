@@ -12,7 +12,7 @@ import numpy as np
 #routes is weird
 
 """
-# Flight Data Anaylsis :plane:
+# Flight Data Anaylsis \U00002708
 This data was aquired from [OpenFlights](https://openflights.org/data.html)
 """
 
