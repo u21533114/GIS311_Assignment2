@@ -1,4 +1,3 @@
-#add python code here
 #from collections import namedtuple
 #import altair as alt
 import math
@@ -24,16 +23,19 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+st.write('<style>body { background-color: red; }</style>', unsafe_allow_html=True)
+
+
 """
 # Flight Data Anaylsis \U00002708
 This data was aquired from [OpenFlights](https://openflights.org/data.html)
 """
 
-airlines = pd.read_csv('airlines.dat')
+airlines = pd.read_csv('airlines.dat', header = None)
 airlines
 airports = pd.read_csv('airports.dat', header = None)
 airports
-countries = pd.read_csv('countries.dat')
+countries = pd.read_csv('countries.dat', header = None)
 countries
 planes = pd.read_csv('planes.dat', header = None)
 planes
