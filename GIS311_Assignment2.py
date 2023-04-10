@@ -34,4 +34,5 @@ geometry = [Point(xy) for xy in zip(airports['longitude'], airports['latitude'])
 crs = {'init': 'epsg:4326'}
 pnt = gpd.GeoDataFrame(airports, crs=crs, geometry=geometry)
 # plot the GeoDataFrame
-pnt.plot()
+map = pnt.plot()
+map
