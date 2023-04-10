@@ -5,7 +5,6 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 import geopandas as gpd
-import matplotlib.pyplot as plt
 #airlines is a table --> can use SQL to create an attribute join to countries table
 #airports has co-ordinates --> can create points and plot these on a map; can also join to countries table
 #countries is a table
@@ -28,4 +27,4 @@ airlines
 airports
 countries
 planes
-plt.plot(routes)
+routes
