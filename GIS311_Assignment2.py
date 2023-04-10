@@ -23,3 +23,8 @@ airports = pd.read_csv('airports.dat', header = None)
 countries = pd.read_csv('countries.dat', header = None)
 planes = pd.read_csv('planes.dat', header = None)
 routes = pd.read_csv('routes.dat', header = None)
+airlines
+airports
+countries
+planes
+routes
