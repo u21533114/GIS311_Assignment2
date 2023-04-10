@@ -30,4 +30,5 @@ routes = pd.read_csv('routes.dat', header = None)
 airports.columns = ['0', '1', '2', '3', '4', '5', 'latitude', 'longitude', '8', '9', '10', '11', '12', '13']
 sub = airports[['latitude', 'longitude']]
 pnt = gpd.GeoDataFrame(sub, geometry = gpd.points_from_xy(sub['latitude'], sub['longitude']))
-pnt.plot()
+map = pnt.plot()
+map
