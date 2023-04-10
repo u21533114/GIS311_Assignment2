@@ -33,6 +33,4 @@ geometry = [Point(xy) for xy in zip(airports['longitude'], airports['latitude'])
 # create a GeoDataFrame with the updated columns and Point geometries
 crs = {'init': 'epsg:4326'}
 pnt = gpd.GeoDataFrame(airports, crs=crs, geometry=geometry)
-# plot the GeoDataFrame
-map = pnt.plot()
-map
+pnt
