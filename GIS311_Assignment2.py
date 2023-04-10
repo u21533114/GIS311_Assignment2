@@ -24,9 +24,8 @@ airports = pd.read_csv('airports.dat', header = None)
 countries = pd.read_csv('countries.dat', header = None)
 planes = pd.read_csv('planes.dat', header = None)
 routes = pd.read_csv('routes.dat', header = None)
-airports.columns = ['0', '1', '2', '3', '4', '5', 'latitude', 'longitude', '8', '9', '10', '11', '12', '13']
-airports
 
-#geometry = [Point(xy) for xy in zip(airports.6, airports.7)]
-#crs = {'init': 'epsg:4326'} # set the coordinate reference system
-#pnt = gpd.GeoDataFrame(airports, crs=crs, geometry=geometry)
+airports.columns = ['0', '1', '2', '3', '4', '5', 'latitude', 'longitude', '8', '9', '10', '11', '12', '13']
+geometry = [Point(xy) for xy in zip(airports.longitude, airports.latitude)]
+crs = {'init': 'epsg:4326'} # set the coordinate reference system
+pnt = gpd.GeoDataFrame(airports, crs=crs, geometry=geometry)
