@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 import geopandas as gpd
+import shapely.geometry
 #airlines is a table --> can use SQL to create an attribute join to countries table
 #airports has co-ordinates --> can create points and plot these on a map; can also join to countries table
 #countries is a table
@@ -23,5 +24,8 @@ airports = pd.read_csv('airports.dat', header = None)
 countries = pd.read_csv('countries.dat', header = None)
 planes = pd.read_csv('planes.dat', header = None)
 routes = pd.read_csv('routes.dat', header = None)
-pnt = gpd.GeoDataFrame(airports, geometry = gpd.points_from_xy(airports[7], airports[6]))
-pnt
+
+
+geometry = [Point(xy) for xy in zip(airports[6], airports[7])]
+crs = {'init': 'epsg:4326'} # set the coordinate reference system
+pnt = gpd.GeoDataFrame(airports, crs=crs, geometry=geometry)
