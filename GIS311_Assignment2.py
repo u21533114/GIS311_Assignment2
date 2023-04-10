@@ -35,4 +35,3 @@ crs = {'init': 'epsg:4326'}
 pnt = gpd.GeoDataFrame(airports, crs=crs, geometry=geometry)
 # plot the GeoDataFrame
 pnt.plot()
-plt.switch_backend('TkAgg') # or 'Qt5Agg' depending on your system
