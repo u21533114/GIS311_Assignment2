@@ -24,3 +24,4 @@ countries = pd.read_csv('countries.dat', header = None)
 planes = pd.read_csv('planes.dat', header = None)
 routes = pd.read_csv('routes.dat', header = None)
 pnt = gpd.GeoDataFrame(airports, geometry = gpd.points_from_xy(airports[7], airports[6]))
+pnt
