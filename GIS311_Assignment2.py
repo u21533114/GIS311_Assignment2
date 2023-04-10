@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 
 
 """
-# Flight Data Anaylsis \U00002708
+# Flight Data Analysis \U00002708
 This data was aquired from [OpenFlights](https://openflights.org/data.html)
 """
 
