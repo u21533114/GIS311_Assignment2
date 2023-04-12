@@ -37,3 +37,33 @@ for i, row in major_sa_airports.iterrows():
     plt.annotate(row['Name'], xy=(row['Longitude'], row['Latitude']), xytext=(5, 5), textcoords='offset points', fontsize=8, fontweight='bold')
 ctx.add_basemap(ax, crs=pnt.crs.to_string(), source=ctx.providers.Stamen.TonerLite)
 st.pyplot(ax.get_figure())
+
+#update routes table
+routes.columns = ['0', '1', 'Source IATA', '3', 'Destination IATA', '5', '6', '7', '8']
+iata_codes = ['JNB', 'CPT', 'DUR', 'PLZ', 'ELS', 'GRJ', 'BFN', 'HLA']
+major_sa_routes = routes[routes['Source IATA'].isin(iata_codes) | routes['Destination IATA'].isin(iata_codes)]
+city_dict = {'JNB': 'Johannesburg', 
+             'CPT': 'Cape Town', 
+             'DUR': 'Durban', 
+             'PLZ': 'Port Elizabeth', 
+             'ELS': 'East London', 
+             'GRJ': 'George', 
+             'BFN': 'Bloemfontein', 
+             'HLA': 'Lanseria'}
+major_sa_routes['Source City'] = major_sa_routes['Source IATA'].apply(lambda x: city_dict.get(x, 'Foreign'))
+major_sa_routes['Destination City'] = major_sa_routes['Destination IATA'].apply(lambda x: city_dict.get(x, 'Foreign'))
+
+#count values
+source_counts = major_sa_routes['Source City'].value_counts()
+dest_counts = major_sa_routes['Destination City'].value_counts()
+total_counts = source_counts + dest_counts
+total_counts
+total_counts.drop('Foreign', inplace=True)
+
+#plot bar chart
+plt.bar(total_counts.index, total_counts.values)
+plt.xlabel('City')
+plt.ylabel('Count')
+plt.title('Number of airline destinations from each city')
+plt.xticks(rotation=45)
+plt.show()
