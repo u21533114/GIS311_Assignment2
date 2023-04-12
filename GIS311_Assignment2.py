@@ -36,4 +36,4 @@ ax.set_ylabel('Latitude', fontsize=12)
 for i, row in major_sa_airports.iterrows():
     plt.annotate(row['Name'], xy=(row['Longitude'], row['Latitude']), xytext=(5, 5), textcoords='offset points', fontsize=8, fontweight='bold')
 map = ctx.add_basemap(ax, crs=pnt.crs.to_string(), source=ctx.providers.Stamen.TonerLite)
-map
+st.pyplot(map.figure)
