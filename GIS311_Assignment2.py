@@ -1,22 +1,14 @@
-#from collections import namedtuple
-#import altair as alt
 import math
 import pandas as pd
 import streamlit as st
 import numpy as np
 import geopandas as gpd
-from shapely.geometry import Point
 import matplotlib.pyplot as plt
-#airlines is a table --> can use SQL to create an attribute join to countries table
-#airports has co-ordinates --> can create points and plot these on a map; can also join to countries table
-#countries is a table
-#planes is a table --> can create a bar chart for types of planes
-#routes is weird
 #NB: 1 map and two charts are needed
 
 
 """
-# Flight Data Analysis \U00002708
+# South African Flight Data Analysis \U00002708
 This data was aquired from [OpenFlights](https://openflights.org/data.html)
 """
 
@@ -26,9 +18,20 @@ countries = pd.read_csv('countries.dat', header = None)
 planes = pd.read_csv('planes.dat', header = None)
 routes = pd.read_csv('routes.dat', header = None)
 
-# rename the columns of the airports DataFrame
-airports.columns = ['0', '1', '2', '3', '4', '5', 'latitude', 'longitude', '8', '9', '10', '11', '12', '13']
-sub = airports[['latitude', 'longitude']]
-pnt = gpd.GeoDataFrame(sub, geometry = gpd.points_from_xy(sub['longitude'], sub['latitude']))
-map = pnt.plot()
-st.pyplot(map.figure)
+#create map showing major airports in SA
+#filter dataset
+airports.columns = ['0', 'Name', 'City', 'Country', 'IATA Code', '5', 'Latitude', 'Longitude', '8', '9', '10', '11', '12', '13']
+sa_airports = airports[airports['Country'] == 'South Africa']
+sa_airports = sa_airports.drop(6618)
+iata_codes = ['JNB', 'CPT', 'DUR', 'PLZ', 'ELS', 'GRJ', 'BFN', 'HLA']
+major_sa_airports = sa_airports[sa_airports['IATA Code'].isin(iata_codes)]
+pnt = gpd.GeoDataFrame(major_sa_airports, geometry = gpd.points_from_xy(major_sa_airports['Longitude'], major_sa_airports['Latitude']))
+pnt = pnt.set_crs('EPSG:4326')
+#plot map
+ax = pnt.plot(figsize=(10, 6), alpha=0.5, color='red', marker='s', markersize=50)
+ax.set_title('Major Airports in South Africa', fontsize=16)
+ax.set_xlabel('Longitude', fontsize=12)
+ax.set_ylabel('Latitude', fontsize=12)
+for i, row in major_sa_airports.iterrows():
+    plt.annotate(row['Name'], xy=(row['Longitude'], row['Latitude']), xytext=(5, 5), textcoords='offset points', fontsize=8, fontweight='bold')
+ctx.add_basemap(ax, crs=pnt.crs.to_string(), source=ctx.providers.Stamen.TonerLite)
