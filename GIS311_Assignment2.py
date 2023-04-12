@@ -4,6 +4,7 @@ import streamlit as st
 import numpy as np
 import geopandas as gpd
 import matplotlib.pyplot as plt
+import contextily as ctx
 #NB: 1 map and two charts are needed
 
 
