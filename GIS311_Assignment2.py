@@ -9,7 +9,7 @@ import contextily as ctx
 
 
 """
-# South African Flight Data Analysis \U00002708
+# South African Flight Data Analysis
 This data was aquired from [OpenFlights](https://openflights.org/data.html)
 """
 
