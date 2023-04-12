@@ -61,9 +61,10 @@ total_counts
 total_counts.drop('Foreign', inplace=True)
 
 #plot bar chart
-plt.bar(total_counts.index, total_counts.values)
-plt.xlabel('City')
-plt.ylabel('Count')
-plt.title('Number of airline destinations from each city')
-plt.xticks(rotation=45)
-plt.show()
+fig, ax = plt.subplots()
+ax.bar(total_counts.index, total_counts.values)
+ax.set_xlabel('City')
+ax.set_ylabel('Count')
+ax.set_title('Number of airline destinations from each city')
+ax.set_xticklabels(total_counts.index, rotation=45)
+st.pyplot(fig)
