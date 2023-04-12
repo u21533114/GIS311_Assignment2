@@ -32,3 +32,4 @@ sub = airports[['latitude', 'longitude']]
 pnt = gpd.GeoDataFrame(sub, geometry = gpd.points_from_xy(sub['longitude'], sub['latitude']))
 map = pnt.plot()
 map
+st.pyplot(map.figure)
