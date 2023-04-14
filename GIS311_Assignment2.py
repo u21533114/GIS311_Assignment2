@@ -47,6 +47,7 @@ scatter = alt.Chart(gdf).mark_point(size=100, filled=True, color='red', opacity=
     width=600,
     height=400
 )
+scatter
 
 # Add airport labels
 text = alt.Chart(gdf).mark_text(dx=10, dy=0, fontWeight='bold').encode(
@@ -56,7 +57,6 @@ text = alt.Chart(gdf).mark_text(dx=10, dy=0, fontWeight='bold').encode(
 )
 
 chart = scatter + text
-chart
 
 # Add basemap
 background = alt.Chart(gdf).mark_geoshape(
