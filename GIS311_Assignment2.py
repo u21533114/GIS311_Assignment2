@@ -56,6 +56,7 @@ text = alt.Chart(gdf).mark_text(dx=10, dy=0, fontWeight='bold').encode(
 )
 
 chart = scatter + text
+chart
 
 # Add basemap
 background = alt.Chart(gdf).mark_geoshape(
