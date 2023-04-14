@@ -30,6 +30,9 @@ major_sa_airports = sa_airports[sa_airports['IATA Code'].isin(iata_codes)]
 pnt = gpd.GeoDataFrame(major_sa_airports, geometry = gpd.points_from_xy(major_sa_airports['Longitude'], major_sa_airports['Latitude']))
 pnt = pnt.set_crs('EPSG:4326')
 
+# Drop geometry column
+major_sa_airports = major_sa_airports.drop(columns=['geometry'])
+
 # Create scatter plot
 scatter = alt.Chart(major_sa_airports).mark_point(size=100, filled=True, color='red', opacity=0.5).encode(
     x=alt.X('Longitude', title='Longitude'),
@@ -47,6 +50,7 @@ text = alt.Chart(major_sa_airports).mark_text(dx=10, dy=0, fontWeight='bold').en
     y='Latitude',
     text='Name'
 )
+
 chart = scatter + text
 
 # Add basemap
@@ -56,7 +60,9 @@ background = alt.Chart(major_sa_airports).mark_geoshape(
 ).encode(
     color=alt.value('white')
 )
+
 (st.altair_chart(background + chart, use_container_width=True))
+
 
 #update routes table
 routes.columns = ['0', '1', 'Source IATA', '3', 'Destination IATA', '5', '6', '7', '8']
