@@ -115,21 +115,18 @@ pie_chart = alt.Chart(province_counts).mark_circle(size=150).encode(
     alt.Y('Province:N', title='Province'),
     color=alt.Color('Province:N', legend=None),
     tooltip=['Province:N', 'Count:Q']
-).configure_axis(
-    labelFontSize=14,
-    titleFontSize=16
-).configure_title(
-    fontSize=18,
-    anchor='middle'
 ).properties(
+    width=600,
+    height=400,
     title={
-        'text': 'Total Counts by Province',
-        'subtitle': 'Distribution of counts by province',
+        'text': 'Total routes by province',
+        'subtitle': 'Distribution of airline routes by province',
         'fontSize': 22,
         'subtitleFontSize': 16,
         'subtitleColor': 'gray'
     }
 )
+
 
 # Display pie chart in Streamlit
 st.altair_chart(pie_chart)
