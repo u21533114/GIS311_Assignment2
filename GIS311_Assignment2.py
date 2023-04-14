@@ -109,7 +109,7 @@ province_counts = province_counts.sort_values('Count', ascending=False)
 # Create pie chart with Altair
 pie_chart = alt.Chart(province_counts).mark_arc().encode(
     theta='Count:Q',
-    color=alt.Color('Province:N', legend=alt.Legend(title='Provinces')),
+    color=alt.Color('Province:N', legend=alt.Legend(title='Provinces'), sort=alt.EncodingSortField(field='Count', op='sum', order='descending')),
     tooltip=['Province:N', 'Count:Q']
 ).properties(
     width=600,
