@@ -103,12 +103,18 @@ provinces = [province_dict.get(city, 'Unknown') for city in total_counts['City']
 total_counts['Province'] = provinces
 
 import altair as alt
+import pandas as pd
+import streamlit as st
 
-# Create pie chart using Altair
-pie_chart = alt.Chart(province_counts.reset_index()).mark_arc().encode(
-    theta='Count',
-    color=alt.Color('Province', legend=None),
-    tooltip=['Province', 'Count']
+# Group the total_counts dataframe by province and sum the counts
+province_counts = total_counts.groupby('Province')['Count'].sum().reset_index()
+
+# Create pie chart with Altair
+pie_chart = alt.Chart(province_counts).mark_circle(size=150).encode(
+    alt.X('Count:Q', title='Count'),
+    alt.Y('Province:N', title='Province'),
+    color=alt.Color('Province:N', legend=None),
+    tooltip=['Province:N', 'Count:Q']
 ).configure_axis(
     labelFontSize=14,
     titleFontSize=16
@@ -125,6 +131,5 @@ pie_chart = alt.Chart(province_counts.reset_index()).mark_arc().encode(
     }
 )
 
-# Show chart
+# Display pie chart in Streamlit
 st.altair_chart(pie_chart)
-
