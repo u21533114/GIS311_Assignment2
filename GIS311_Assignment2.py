@@ -36,7 +36,7 @@ gdf = gpd.GeoDataFrame(
     major_sa_airports, geometry=gpd.points_from_xy(major_sa_airports.Longitude, major_sa_airports.Latitude), crs='EPSG:4326')
 
 # Create scatter plot
-scatter = alt.Chart(major_sa_airports).mark_point(size=100, filled=True, color='red', opacity=0.5).encode(
+scatter = alt.Chart(gdf).mark_point(size=100, filled=True, color='red', opacity=0.5).encode(
     x=alt.X('Longitude', title='Longitude'),
     y=alt.Y('Latitude', title='Latitude'),
     tooltip=['Name']
@@ -47,11 +47,12 @@ scatter = alt.Chart(major_sa_airports).mark_point(size=100, filled=True, color='
 )
 
 # Add airport labels
-text = alt.Chart(major_sa_airports).mark_text(dx=10, dy=0, fontWeight='bold').encode(
+text = alt.Chart(gdf).mark_text(dx=10, dy=0, fontWeight='bold').encode(
     x='Longitude',
     y='Latitude',
     text='Name'
 )
+
 chart = scatter + text
 
 # Add basemap
