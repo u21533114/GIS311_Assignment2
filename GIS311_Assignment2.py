@@ -5,6 +5,7 @@ import numpy as np
 import geopandas as gpd
 import matplotlib.pyplot as plt
 import contextily as ctx
+import altair as alt
 #NB: 1 map and two charts are needed
 
 
@@ -61,10 +62,12 @@ total_counts
 total_counts.drop('Foreign', inplace=True)
 
 #plot bar chart
-fig, ax = plt.subplots()
-ax.bar(total_counts.index, total_counts.values)
-ax.set_xlabel('City')
-ax.set_ylabel('Count')
-ax.set_title('Number of airline destinations from each city')
-ax.set_xticklabels(total_counts.index, rotation=45)
-st.pyplot(fig)
+chart = alt.Chart(total_counts.reset_index()).mark_bar().encode(
+    x=alt.X('index:N', axis=alt.Axis(title='City', labelAngle=45)),
+    y=alt.Y('values:Q', axis=alt.Axis(title='Count')),
+    tooltip=[alt.Tooltip('index:N', title='City'), alt.Tooltip('values:Q', title='Count')]
+).properties(
+    title='Number of airline destinations from each city'
+)
+
+st.altair_chart(chart)
