@@ -103,9 +103,8 @@ provinces = [province_dict.get(city, 'Unknown') for city in total_counts['City']
 total_counts['Province'] = provinces
 
 # Create pie chart using Altair
-pie_chart = alt.Chart(total_counts).mark_circle(size=150).encode(
-    alt.X('Count', title='Count'),
-    alt.Y('Province', title='Province'),
+pie_chart = alt.Chart(total_counts).mark_arc().encode(
+    theta='Count',
     color=alt.Color('Province', legend=None),
     tooltip=['Province', 'Count']
 ).configure_axis(
