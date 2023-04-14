@@ -35,30 +35,14 @@ pnt = pnt.set_crs('EPSG:4326')
 
 ### plot map
 
-
-# Read in a South Africa shapefile
-gdf = gpd.read_file("path/to/shapefile")
-
-# Create an Altair chart with the South Africa shapefile
-base = alt.Chart(gdf).mark_geoshape(
-    stroke='white', strokeWidth=0.5
-).encode(
-    color='attribute_to_color_by'
-).properties(
-    width=800,
-    height=500
-)
-
-# Add the OpenStreetMap basemap using contextily
-chart = base + ctx.add_basemap(
-    base,
-    crs=gdf.crs.to_string(),
-    source=ctx.providers.OpenStreetMap.Mapnik
-)
-
-# Display the chart in Streamlit
-st.altair_chart(chart, use_container_width=True)
-
+ax = pnt.plot(figsize=(10, 6), alpha=0.5, color='red', marker='s', markersize=50)
+ax.set_title('Major Airports in South Africa', fontsize=16)
+ax.set_xlabel('Longitude', fontsize=12)
+ax.set_ylabel('Latitude', fontsize=12)
+for i, row in major_sa_airports.iterrows():
+    plt.annotate(row['Name'], xy=(row['Longitude'], row['Latitude']), xytext=(5, 5), textcoords='offset points', fontsize=8, fontweight='bold')
+ctx.add_basemap(ax, crs=pnt.crs.to_string(), source=ctx.providers.Stamen.TonerLite)
+st.pyplot(ax.get_figure())
 
 ###
 
