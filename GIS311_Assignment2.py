@@ -36,16 +36,28 @@ pnt = pnt.set_crs('EPSG:4326')
 ### plot map
 
 
-url = 'https://www.openstreetmap.org/#map=5/-28.676/24.677'
-gdf = gpd.read_file(url)
+# Read in a South Africa shapefile
+gdf = gpd.read_file("path/to/shapefile")
 
-# Plot the map using Altair
-alt.Chart(gdf).mark_geoshape(stroke='white', strokeWidth=0.5).project(
-    'mercator'
+# Create an Altair chart with the South Africa shapefile
+base = alt.Chart(gdf).mark_geoshape(
+    stroke='white', strokeWidth=0.5
+).encode(
+    color='attribute_to_color_by'
 ).properties(
-    width=600,
-    height=600
+    width=800,
+    height=500
 )
+
+# Add the OpenStreetMap basemap using contextily
+chart = base + ctx.add_basemap(
+    base,
+    crs=gdf.crs.to_string(),
+    source=ctx.providers.OpenStreetMap.Mapnik
+)
+
+# Display the chart in Streamlit
+st.altair_chart(chart, use_container_width=True)
 
 
 ###
