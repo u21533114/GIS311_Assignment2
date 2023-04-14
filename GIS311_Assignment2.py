@@ -101,11 +101,7 @@ provinces = [province_dict.get(city, 'Unknown') for city in total_counts['City']
 
 # Add the 'province' column to the dataframe
 total_counts['Province'] = provinces
-
-import altair as alt
-import pandas as pd
-import streamlit as st
-
+total_counts
 # Group the total_counts dataframe by province and sum the counts
 province_counts = total_counts.groupby('Province')['Count'].sum().reset_index()
 
