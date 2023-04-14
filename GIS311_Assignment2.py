@@ -74,7 +74,6 @@ st.altair_chart(chart + background +
                 ), use_container_width=True)
 
 
-###
 #update routes table
 routes.columns = ['0', '1', 'Source IATA', '3', 'Destination IATA', '5', '6', '7', '8']
 iata_codes = ['JNB', 'CPT', 'DUR', 'PLZ', 'ELS', 'GRJ', 'BFN', 'HLA']
