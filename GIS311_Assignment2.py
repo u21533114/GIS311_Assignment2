@@ -59,12 +59,11 @@ source_counts = major_sa_routes['Source City'].value_counts()
 dest_counts = major_sa_routes['Destination City'].value_counts()
 total_counts = source_counts + dest_counts
 total_counts.drop('Foreign', inplace=True)
+print(total_counts)
 
 #plot bar chart
 total_counts = total_counts.reset_index()
 total_counts.columns = ['City', 'Count']
-
-print(total_counts)
 
 chart = alt.Chart(total_counts).mark_bar().encode(
     x=alt.X('City:N', axis=alt.Axis(title='City', labelAngle=45)),
