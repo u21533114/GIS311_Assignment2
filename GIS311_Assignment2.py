@@ -102,6 +102,8 @@ provinces = [province_dict.get(city, 'Unknown') for city in total_counts['City']
 # Add the 'province' column to the dataframe
 total_counts['Province'] = provinces
 
+import altair as alt
+
 # Create pie chart using Altair
 pie_chart = alt.Chart(total_counts).mark_arc().encode(
     theta='Count',
@@ -125,3 +127,4 @@ pie_chart = alt.Chart(total_counts).mark_arc().encode(
 
 # Show chart
 st.altair_chart(pie_chart)
+
