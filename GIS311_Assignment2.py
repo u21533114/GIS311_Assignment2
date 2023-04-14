@@ -37,30 +37,16 @@ pnt = pnt.set_crs('EPSG:4326')
 ### plot map
 
 
-# Load data
-with open('https://raw.githubusercontent.com/deldersveld/topojson/master/countries/south-africa/south-africa-provinces.json') as f:
-    sa_map = json.load(f)
+url = 'https://github.com/deldersveld/topojson/raw/master/countries/south-africa/south-africa-provinces.geojson'
+gdf = gpd.read_file(url)
 
-# Create Altair Chart
-chart = alt.Chart(alt.Data(values=sa_map)).mark_geoshape(
-    stroke='black',
-    strokeWidth=0.5
-).encode(
-    color=alt.value('white'),
-    opacity=alt.value(0.1),
-    tooltip=[alt.Tooltip('properties.name:N', title='Province')]
-).transform_calculate(
-    id="datum.id"
-).project(
-    type='mercator'
+# Plot the map using Altair
+alt.Chart(gdf).mark_geoshape(stroke='white', strokeWidth=0.5).project(
+    'mercator'
 ).properties(
-    width=800,
-    height=600,
-    title='South Africa'
+    width=600,
+    height=600
 )
-
-# Display Chart
-chart
 
 
 ###
