@@ -108,7 +108,7 @@ province_counts = total_counts.groupby('Province')['Count'].sum().reset_index()
 # Create pie chart with Altair
 pie_chart = alt.Chart(province_counts).mark_arc().encode(
     theta='Count:Q',
-    color=alt.Color('Province:N', legend=None),
+    color=alt.Color('Province:N', legend=alt.Legend(title='Provinces')),
     tooltip=['Province:N', 'Count:Q']
 ).properties(
     width=600,
