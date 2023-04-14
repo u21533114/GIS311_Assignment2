@@ -30,44 +30,14 @@ major_sa_airports = sa_airports[sa_airports['IATA Code'].isin(iata_codes)]
 pnt = gpd.GeoDataFrame(major_sa_airports, geometry = gpd.points_from_xy(major_sa_airports['Longitude'], major_sa_airports['Latitude']))
 pnt = pnt.set_crs('EPSG:4326')
 
-# Drop geometry column
-major_sa_airports = major_sa_airports.drop(columns=['geometry'])
-
-# Create scatter plot
-scatter = alt.Chart(major_sa_airports).mark_point(size=100, filled=True, color='red', opacity=0.5).encode(
-    x=alt.X('Longitude', title='Longitude'),
-    y=alt.Y('Latitude', title='Latitude'),
-    tooltip=['Name']
-).properties(
-    title='Major Airports in South Africa',
-    width=600,
-    height=400
-)
-
-# Add airport labels
-text = alt.Chart(major_sa_airports).mark_text(dx=10, dy=0, fontWeight='bold').encode(
-    x='Longitude',
-    y='Latitude',
-    text='Name'
-)
-
-chart = scatter + text
-
-# Add basemap
-sa = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
-sa = sa[sa.name == "South Africa"]
-sa = sa.to_crs(epsg=4326)
-
-background = alt.Chart(sa).mark_geoshape(
-    fill='white',
-    stroke='black',
-    strokeWidth=0.5
-).encode(
-    color=alt.value('white')
-)
-
-(st.altair_chart(background + chart.properties(width=700, height=500), use_container_width=True) \
-    .configure_view(strokeWidth=0))  # Remove gridlines
+ax = pnt.plot(figsize=(10, 6), alpha=0.5, color='red', marker='s', markersize=50)
+ax.set_title('Major Airports in South Africa', fontsize=16)
+ax.set_xlabel('Longitude', fontsize=12)
+ax.set_ylabel('Latitude', fontsize=12)
+for i, row in major_sa_airports.iterrows():
+    plt.annotate(row['Name'], xy=(row['Longitude'], row['Latitude']), xytext=(5, 5), textcoords='offset points', fontsize=8, fontweight='bold')
+ctx.add_basemap(ax, crs=pnt.crs.to_string(), source=ctx.providers.Stamen.TonerLite)
+st.pyplot(ax.get_figure())
 
 #update routes table
 routes.columns = ['0', '1', 'Source IATA', '3', 'Destination IATA', '5', '6', '7', '8']
