@@ -64,14 +64,12 @@ total_counts.drop('Foreign', inplace=True)
 total_counts = total_counts.reset_index()
 total_counts.columns = ['City', 'Count']
 
-chart = alt.Chart(total_counts.reset_index()).mark_bar().encode(
+chart = alt.Chart(total_counts.reset_index(), width=600, height=600).mark_bar().encode(
     x=alt.X('index:N', axis=alt.Axis(title='City', labelAngle=45)),
     y=alt.Y('values:Q', axis=alt.Axis(title='Count')),
     tooltip=[alt.Tooltip('index:N', title='City'), alt.Tooltip('values:Q', title='Count')]
 ).properties(
     title='Number of airline destinations from each city'
-).configure_view(
-    width=600,
-    height=600
 )
+
 st.altair_chart(chart)
