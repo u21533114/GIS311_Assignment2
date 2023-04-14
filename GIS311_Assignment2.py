@@ -61,6 +61,7 @@ total_counts = source_counts + dest_counts
 total_counts.drop('Foreign', inplace=True)
 
 #plot bar chart
+total_counts.columns = ['City', 'Count']
 chart = alt.Chart(total_counts.reset_index()).mark_bar().encode(
     x=alt.X('index:N', axis=alt.Axis(title='City', labelAngle=45)),
     y=alt.Y('values:Q', axis=alt.Axis(title='Count')),
