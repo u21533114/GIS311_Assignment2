@@ -47,7 +47,7 @@ scatter = alt.Chart(gdf).mark_point(size=100, filled=True, color='red', opacity=
     width=600,
     height=400
 )
-scatter
+st.altair_chart(scatter)
 
 # Add airport labels
 text = alt.Chart(gdf).mark_text(dx=10, dy=0, fontWeight='bold').encode(
