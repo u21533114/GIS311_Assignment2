@@ -64,11 +64,12 @@ total_counts['Airport'] = ['OR Tambo International Airport', 'Cape Town Internat
 #plot bar chart
 total_counts = total_counts.reset_index()
 total_counts.columns = ['City', 'Count', 'Airport']
+total_counts
 
 chart = alt.Chart(total_counts).mark_bar().encode(
     x=alt.X('City:N', axis=alt.Axis(title='City', labelAngle=0)),
     y=alt.Y('Count:Q', axis=alt.Axis(title='Count')),
-    tooltip=[alt.Tooltip('City:N', title='City'), alt.Tooltip('Airport:N', title='Airport'), alt.Tooltip('Count:Q', title='Count')]
+    tooltip=[alt.Tooltip('City:N', title='City'), alt.Tooltip('Count:Q', title='Count')]
 ).properties(
     title='Number of airline destinations from each city',
     width=600,
