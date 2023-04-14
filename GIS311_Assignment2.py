@@ -79,3 +79,4 @@ chart = alt.Chart(total_counts).mark_bar().encode(
     width=600,
     height=400
 )
+st.altair_chart(chart)
