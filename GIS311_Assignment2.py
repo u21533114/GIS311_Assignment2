@@ -33,7 +33,7 @@ pnt = pnt.set_crs('EPSG:4326')
 
 
 
-### plot map
+### plot map --> make interactive if possible?
 
 ax = pnt.plot(figsize=(10, 6), alpha=0.5, color='red', marker='s', markersize=50)
 ax.set_title('Major Airports in South Africa', fontsize=16)
@@ -125,4 +125,4 @@ pie_chart = alt.Chart(total_counts).mark_circle(size=150).encode(
 )
 
 # Show chart
-pie_chart.show()
+st.altair_chart(pie_chart)
