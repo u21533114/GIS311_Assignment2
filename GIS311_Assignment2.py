@@ -37,8 +37,8 @@ gdf = gpd.GeoDataFrame(
 
 # Create scatter plot
 scatter = alt.Chart(gdf).mark_point(size=100, filled=True, color='red', opacity=0.5).encode(
-    x=alt.X('geometry.x', title='Longitude'),
-    y=alt.Y('geometry.y', title='Latitude'),
+    x=alt.X('Longitude', title='Longitude'),
+    y=alt.Y('Latitude', title='Latitude'),
     tooltip=['Name']
 ).properties(
     title='Major Airports in South Africa',
@@ -48,8 +48,8 @@ scatter = alt.Chart(gdf).mark_point(size=100, filled=True, color='red', opacity=
 
 # Add airport labels
 text = alt.Chart(gdf).mark_text(dx=10, dy=0, fontWeight='bold').encode(
-    x='geometry.x',
-    y='geometry.y',
+    x='Longitude',
+    y='Latitude',
     text='Name'
 )
 
@@ -69,9 +69,10 @@ background = alt.Chart(gdf).mark_geoshape(
 
 st.altair_chart(chart + background + 
                 alt.layer(
-                    ctx.providers.OpenStreetMap.Mapnik().to_tile_layer(crs='EPSG:4326'),
-                    ctx.providers.OpenStreetMap.Mapnik().to_labels(crs='EPSG:4326')
+                    ctx.providers.OpenStreetMap.Mapnik().tiles,
+                    ctx.providers.OpenStreetMap.Mapnik().labels
                 ), use_container_width=True)
+
 
 ###
 #update routes table
