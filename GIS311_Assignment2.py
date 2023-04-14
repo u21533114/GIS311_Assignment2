@@ -101,14 +101,13 @@ provinces = [province_dict.get(city, 'Unknown') for city in total_counts['City']
 
 # Add the 'province' column to the dataframe
 total_counts['Province'] = provinces
-total_counts
+
 # Group the total_counts dataframe by province and sum the counts
 province_counts = total_counts.groupby('Province')['Count'].sum().reset_index()
 
 # Create pie chart with Altair
-pie_chart = alt.Chart(province_counts).mark_circle(size=150).encode(
-    alt.X('Count:Q', title='Count'),
-    alt.Y('Province:N', title='Province'),
+pie_chart = alt.Chart(province_counts).mark_arc().encode(
+    theta='Count:Q',
     color=alt.Color('Province:N', legend=None),
     tooltip=['Province:N', 'Count:Q']
 ).properties(
