@@ -57,6 +57,7 @@ text = alt.Chart(gdf).mark_text(dx=10, dy=0, fontWeight='bold').encode(
 
 chart = scatter + text
 
+# Add basemap
 background = alt.Chart(gdf).mark_geoshape(
     stroke='black',
     strokeWidth=0.5
@@ -68,39 +69,11 @@ background = alt.Chart(gdf).mark_geoshape(
     height=400
 )
 
-tiles_layer = alt.UrlData(
-    url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    format=alt.DataFormat(
-        mimetype='image/png',
-        property='image'
-    ),
-    attribution='Map data © OpenStreetMap contributors'
-)
-
-labels_layer = alt.UrlData(
-    url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    format=alt.DataFormat(
-        mimetype='image/png',
-        property='image'
-    ),
-    attribution='Map data © OpenStreetMap contributors'
-)
-
 st.altair_chart(chart + background + 
                 alt.layer(
-                    alt.ImageLayer(
-                        tiles=tiles_layer,
-                        bounds='[{{-11.2447}}, {{32.4383}}], [{{-17.8228}}, {{25.2589}}]',
-                        extent='full'
-                    ),
-                    alt.ImageLayer(
-                        tiles=labels_layer,
-                        bounds='[{{-11.2447}}, {{32.4383}}], [{{-17.8228}}, {{25.2589}}]',
-                        extent='full'
-                    )
+                    ctx.providers.OpenStreetMap.Mapnik().tiles[0],
+                    ctx.providers.OpenStreetMap.Mapnik().labels[0]
                 ), use_container_width=True)
-
-
 
 ###
 
