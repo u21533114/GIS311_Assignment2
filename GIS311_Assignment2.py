@@ -66,6 +66,7 @@ total_counts.drop('Foreign', inplace=True)
 # plot bar chart
 total_counts = total_counts.reset_index()
 total_counts.columns = ['City', 'Count']
+total_counts
 
 chart = alt.Chart(total_counts).mark_bar().encode(
     x=alt.X('City:N', axis=alt.Axis(title='City', labelAngle=0)),
@@ -76,4 +77,4 @@ chart = alt.Chart(total_counts).mark_bar().encode(
     width=600,
     height=400
 )
-st.altair_chart(chart)
+#st.altair_chart(chart)
