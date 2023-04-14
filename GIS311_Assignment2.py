@@ -105,7 +105,7 @@ total_counts['Province'] = provinces
 import altair as alt
 
 # Create pie chart using Altair
-pie_chart = alt.Chart(total_counts).mark_arc().encode(
+pie_chart = alt.Chart(province_counts.reset_index()).mark_arc().encode(
     theta='Count',
     color=alt.Color('Province', legend=None),
     tooltip=['Province', 'Count']
