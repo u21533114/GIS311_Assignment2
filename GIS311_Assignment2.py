@@ -106,14 +106,11 @@ total_counts['Province'] = provinces
 province_counts = total_counts.groupby('Province')['Count'].sum().reset_index()
 province_counts = province_counts.sort_values('Count', ascending=False)
 
-# Calculate the total count of all routes
-total_count = province_counts['Count'].sum()
-
 # Create pie chart with Altair
 pie_chart = alt.Chart(province_counts).mark_arc().encode(
-    value=alt.Value('Count:Q', stack=None, title='Percentage', axis=alt.Axis(format='%', tickCount=5)),
-    color=alt.Color('Province:N', legend=alt.Legend(title='Provinces'), sort=alt.EncodingSortField(field='Count', op='sum', order='descending')),
-    tooltip=[alt.Tooltip('Province:N'), alt.Tooltip('Count:Q', format='.2f')],
+    theta='Count:Q',
+    color=alt.Color('Province:N', legend=alt.Legend(title='Provinces'), sort=alt.EncodingSortField(field='Count', op='sum', order='descending')), #that's not working...
+    tooltip=['Province:N', 'Count:Q']
 ).properties(
     width=600,
     height=400,
@@ -124,10 +121,7 @@ pie_chart = alt.Chart(province_counts).mark_arc().encode(
         'subtitleFontSize': 16,
         'subtitleColor': 'gray'
     }
-).transform_calculate(
-    Count=alt.datum.Count / total_count * 100
 )
 
 # Display pie chart in Streamlit
 st.altair_chart(pie_chart)
-
