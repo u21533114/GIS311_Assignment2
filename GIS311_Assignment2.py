@@ -58,7 +58,6 @@ major_sa_routes['Destination City'] = major_sa_routes['Destination IATA'].apply(
 source_counts = major_sa_routes['Source City'].value_counts()
 dest_counts = major_sa_routes['Destination City'].value_counts()
 total_counts = source_counts + dest_counts
-total_counts
 total_counts.drop('Foreign', inplace=True)
 
 #plot bar chart
@@ -69,5 +68,5 @@ chart = alt.Chart(total_counts.reset_index()).mark_bar().encode(
 ).properties(
     title='Number of airline destinations from each city'
 )
-
-st.altair_chart(chart)
+st.write(total_counts)
+#st.altair_chart(chart)
