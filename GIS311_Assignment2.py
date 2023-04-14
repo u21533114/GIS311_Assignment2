@@ -6,7 +6,6 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 import contextily as ctx
 import altair as alt
-import json
 #NB: 1 map and two charts are needed
 
 
@@ -37,7 +36,7 @@ pnt = pnt.set_crs('EPSG:4326')
 ### plot map
 
 
-url = 'https://github.com/deldersveld/topojson/raw/master/countries/south-africa/south-africa-provinces.geojson'
+url = 'https://www.openstreetmap.org/#map=5/-28.676/24.677'
 gdf = gpd.read_file(url)
 
 # Plot the map using Altair
