@@ -60,12 +60,11 @@ dest_counts = major_sa_routes['Destination City'].value_counts()
 total_counts = source_counts + dest_counts
 total_counts.drop('Foreign', inplace=True)
 
-# Add airport names to the dataframe
-#total_counts['Airport'] = ['OR Tambo International Airport', 'Cape Town International Airport','King Shaka International Airport', 'Port Elizabeth Airport','East London Airport', 'George Airport', 'Bram Fischer Airport','Lanseria Airport']
-
 # plot bar chart
 total_counts = total_counts.reset_index()
 total_counts.columns = ['City', 'Count']
+total_counts['Airport'] = ['OR Tambo International Airport', 'Cape Town International Airport','King Shaka International Airport', 'Port Elizabeth Airport','East London Airport', 'George Airport', 'Bram Fischer Airport','Lanseria Airport']
+
 total_counts
 
 chart = alt.Chart(total_counts).mark_bar().encode(
