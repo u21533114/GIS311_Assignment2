@@ -54,15 +54,20 @@ text = alt.Chart(major_sa_airports).mark_text(dx=10, dy=0, fontWeight='bold').en
 chart = scatter + text
 
 # Add basemap
-background = alt.Chart(major_sa_airports).mark_geoshape(
+sa = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+sa = sa[sa.name == "South Africa"]
+sa = sa.to_crs(epsg=4326)
+
+background = alt.Chart(sa).mark_geoshape(
+    fill='white',
     stroke='black',
     strokeWidth=0.5
 ).encode(
     color=alt.value('white')
 )
 
-(st.altair_chart(background + chart, use_container_width=True))
-
+(st.altair_chart(background + chart.properties(width=700, height=500), use_container_width=True) \
+    .configure_view(strokeWidth=0))  # Remove gridlines
 
 #update routes table
 routes.columns = ['0', '1', 'Source IATA', '3', 'Destination IATA', '5', '6', '7', '8']
