@@ -69,7 +69,7 @@ background = alt.Chart(gdf).mark_geoshape(
 
 st.altair_chart(chart + background + 
                 alt.layer(
-                    ctx.providers.OpenStreetMap.Mapnik().to_tile_layer(),
+                    ctx.providers.OpenStreetMap.Mapnik().to_layer(),
                     ctx.providers.OpenStreetMap.Mapnik().labels
                 ), use_container_width=True)
 
