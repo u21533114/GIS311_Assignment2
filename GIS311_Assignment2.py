@@ -29,6 +29,8 @@ iata_codes = ['JNB', 'CPT', 'DUR', 'PLZ', 'ELS', 'GRJ', 'BFN', 'HLA']
 major_sa_airports = sa_airports[sa_airports['IATA Code'].isin(iata_codes)]
 pnt = gpd.GeoDataFrame(major_sa_airports, geometry = gpd.points_from_xy(major_sa_airports['Longitude'], major_sa_airports['Latitude']))
 pnt = pnt.set_crs('EPSG:4326')
+
+
 ###
 
 # Create GeoDataFrame
@@ -55,7 +57,6 @@ text = alt.Chart(gdf).mark_text(dx=10, dy=0, fontWeight='bold').encode(
 
 chart = scatter + text
 
-# Add basemap
 background = alt.Chart(gdf).mark_geoshape(
     stroke='black',
     strokeWidth=0.5
@@ -67,11 +68,41 @@ background = alt.Chart(gdf).mark_geoshape(
     height=400
 )
 
+tiles_layer = alt.UrlData(
+    url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    format=alt.DataFormat(
+        mimetype='image/png',
+        property='image'
+    ),
+    attribution='Map data © OpenStreetMap contributors'
+)
+
+labels_layer = alt.UrlData(
+    url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    format=alt.DataFormat(
+        mimetype='image/png',
+        property='image'
+    ),
+    attribution='Map data © OpenStreetMap contributors'
+)
+
 st.altair_chart(chart + background + 
                 alt.layer(
-                    ctx.providers.OpenStreetMap.Mapnik().to_layer(),
-                    ctx.providers.OpenStreetMap.Mapnik().labels
+                    alt.ImageLayer(
+                        tiles=tiles_layer,
+                        bounds='[{{-11.2447}}, {{32.4383}}], [{{-17.8228}}, {{25.2589}}]',
+                        extent='full'
+                    ),
+                    alt.ImageLayer(
+                        tiles=labels_layer,
+                        bounds='[{{-11.2447}}, {{32.4383}}], [{{-17.8228}}, {{25.2589}}]',
+                        extent='full'
+                    )
                 ), use_container_width=True)
+
+
+
+###
 
 
 #update routes table
