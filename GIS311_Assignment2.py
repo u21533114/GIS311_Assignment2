@@ -72,5 +72,5 @@ chart = alt.Chart(total_counts).mark_bar().encode(
     title='Number of airline destinations from each city'
 )
 
-st.altair_chart(chart)
-
+#st.altair_chart(chart)
+print(total_counts)
