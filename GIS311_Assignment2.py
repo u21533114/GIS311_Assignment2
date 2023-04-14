@@ -83,3 +83,46 @@ chart = alt.Chart(total_counts).mark_bar().encode(
     height=400
 )
 st.altair_chart(chart)
+
+# Dictionary mapping cities to provinces
+province_dict = {
+    'Johannesburg': 'Gauteng',
+    'Lanseria': 'Gauteng',
+    'Durban': 'Kwa-Zulu Natal',
+    'Port Elizabeth': 'Eastern Cape',
+    'East London': 'Eastern Cape',
+    'Cape Town': 'Western Cape',
+    'Bloemfontein': 'Free State',
+    'George': 'Western Cape'
+}
+
+# Create a list of provinces for each city in the 'city' column
+provinces = [province_dict.get(city, 'Unknown') for city in total_counts['City']]
+
+# Add the 'province' column to the dataframe
+total_counts['Province'] = provinces
+
+# Create pie chart using Altair
+pie_chart = alt.Chart(total_counts).mark_circle(size=150).encode(
+    alt.X('Count', title='Count'),
+    alt.Y('Province', title='Province'),
+    color=alt.Color('Province', legend=None),
+    tooltip=['Province', 'Count']
+).configure_axis(
+    labelFontSize=14,
+    titleFontSize=16
+).configure_title(
+    fontSize=18,
+    anchor='middle'
+).properties(
+    title={
+        'text': 'Total Counts by Province',
+        'subtitle': 'Distribution of counts by province',
+        'fontSize': 22,
+        'subtitleFontSize': 16,
+        'subtitleColor': 'gray'
+    }
+)
+
+# Show chart
+pie_chart.show()
