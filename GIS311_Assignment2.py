@@ -43,14 +43,14 @@ st.pyplot(ax.get_figure())
 routes.columns = ['0', '1', 'Source IATA', '3', 'Destination IATA', '5', '6', '7', '8']
 iata_codes = ['JNB', 'CPT', 'DUR', 'PLZ', 'ELS', 'GRJ', 'BFN', 'HLA']
 major_sa_routes = routes[routes['Source IATA'].isin(iata_codes) | routes['Destination IATA'].isin(iata_codes)]
-city_dict = {'JNB': 'Johannesburg', 
-             'CPT': 'Cape Town', 
-             'DUR': 'Durban', 
-             'PLZ': 'Port Elizabeth', 
-             'ELS': 'East London', 
-             'GRJ': 'George', 
-             'BFN': 'Bloemfontein', 
-             'HLA': 'Lanseria'}
+city_dict = {'JNB': 'OR Tambo International Airport', 
+             'CPT': 'Cape Town International Airport', 
+             'DUR': 'King Shaka International Airport', 
+             'PLZ': 'Port Elizabeth Airport', 
+             'ELS': 'East London Airport', 
+             'GRJ': 'George Airport', 
+             'BFN': 'Bram Fischer Airport', 
+             'HLA': 'Lanseria Airport'}
 major_sa_routes['Source City'] = major_sa_routes['Source IATA'].apply(lambda x: city_dict.get(x, 'Foreign'))
 major_sa_routes['Destination City'] = major_sa_routes['Destination IATA'].apply(lambda x: city_dict.get(x, 'Foreign'))
 
@@ -59,21 +59,20 @@ source_counts = major_sa_routes['Source City'].value_counts()
 dest_counts = major_sa_routes['Destination City'].value_counts()
 total_counts = source_counts + dest_counts
 total_counts.drop('Foreign', inplace=True)
-total_counts['Airport'] = ['OR Tambo International Airport', 'Cape Town International Airport', 'King Shaka International Airport', 'Port Elizabeth Airport', 'East London Airport', 'George Airport', 'Bram Fischer Airport', 'Lanseria Airport']
 
 #plot bar chart
 total_counts = total_counts.reset_index()
-total_counts.columns = ['City', 'Count', 'Airport']
+total_counts.columns = ['Airport', 'Count']
 total_counts
 
 chart = alt.Chart(total_counts).mark_bar().encode(
-    x=alt.X('City:N', axis=alt.Axis(title='City', labelAngle=0)),
+    x=alt.X('Airport:N', axis=alt.Axis(title='Airport', labelAngle=0)),
     y=alt.Y('Count:Q', axis=alt.Axis(title='Count')),
-    tooltip=[alt.Tooltip('City:N', title='City'), alt.Tooltip('Count:Q', title='Count')]
+    tooltip=[alt.Tooltip('Airport:N', title='Airport'), alt.Tooltip('Count:Q', title='Count')]
 ).properties(
-    title='Number of airline destinations from each city',
+    title='Number of airline destinations from each airport',
     width=600,
     height=400
 )
 
-#st.altair_chart(chart)
+st.altair_chart(chart)
