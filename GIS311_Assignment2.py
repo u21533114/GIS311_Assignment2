@@ -59,10 +59,11 @@ source_counts = major_sa_routes['Source City'].value_counts()
 dest_counts = major_sa_routes['Destination City'].value_counts()
 total_counts = source_counts + dest_counts
 total_counts.drop('Foreign', inplace=True)
+total_counts['Airport'] = ['OR Tambo International Airport', 'Cape Town International Airport', 'King Shaka International Airport', 'Port Elizabeth Airport', 'East London Airport', 'George Airport', 'Bram Fischer Airport', 'Lanseria Airport']
 
 #plot bar chart
 total_counts = total_counts.reset_index()
-total_counts.columns = ['City', 'Count']
+total_counts.columns = ['City', 'Count', 'Airport']
 
 chart = alt.Chart(total_counts).mark_bar().encode(
     x=alt.X('City:N', axis=alt.Axis(title='City', labelAngle=0)),
@@ -73,5 +74,5 @@ chart = alt.Chart(total_counts).mark_bar().encode(
     width=600,
     height=400
 )
-
-st.altair_chart(chart)
+#st.altair_chart(chart)
+total_counts
