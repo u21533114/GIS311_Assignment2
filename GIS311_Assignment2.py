@@ -6,6 +6,7 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 import contextily as ctx
 import altair as alt
+import json
 #NB: 1 map and two charts are needed
 
 
@@ -31,16 +32,36 @@ pnt = gpd.GeoDataFrame(major_sa_airports, geometry = gpd.points_from_xy(major_sa
 pnt = pnt.set_crs('EPSG:4326')
 
 
+
+
 ### plot map
 
-ax = pnt.plot(figsize=(10, 6), alpha=0.5, color='red', marker='s', markersize=50)
-ax.set_title('Major Airports in South Africa', fontsize=16)
-ax.set_xlabel('Longitude', fontsize=12)
-ax.set_ylabel('Latitude', fontsize=12)
-for i, row in major_sa_airports.iterrows():
-    plt.annotate(row['Name'], xy=(row['Longitude'], row['Latitude']), xytext=(5, 5), textcoords='offset points', fontsize=8, fontweight='bold')
-ctx.add_basemap(ax, crs=pnt.crs.to_string(), source=ctx.providers.Stamen.TonerLite)
-st.pyplot(ax.get_figure())
+
+# Load data
+with open('https://raw.githubusercontent.com/deldersveld/topojson/master/countries/south-africa/south-africa-provinces.json') as f:
+    sa_map = json.load(f)
+
+# Create Altair Chart
+chart = alt.Chart(alt.Data(values=sa_map)).mark_geoshape(
+    stroke='black',
+    strokeWidth=0.5
+).encode(
+    color=alt.value('white'),
+    opacity=alt.value(0.1),
+    tooltip=[alt.Tooltip('properties.name:N', title='Province')]
+).transform_calculate(
+    id="datum.id"
+).project(
+    type='mercator'
+).properties(
+    width=800,
+    height=600,
+    title='South Africa'
+)
+
+# Display Chart
+chart
+
 
 ###
 
