@@ -12,8 +12,8 @@ import altair as alt
 """
 # South African Flight Data Analysis
 This data was aquired from [OpenFlights](https://openflights.org/data.html)
-_____________________________________________________________________________
 Should Lanseria Airport focus on its expansion plans? 
+_____________________________________________________________________________
 """
 
 #import data
@@ -33,11 +33,7 @@ major_sa_airports = sa_airports[sa_airports['IATA Code'].isin(iata_codes)]
 pnt = gpd.GeoDataFrame(major_sa_airports, geometry = gpd.points_from_xy(major_sa_airports['Longitude'], major_sa_airports['Latitude']))
 pnt = pnt.set_crs('EPSG:4326')
 
-
-
-
-### plot map --> make interactive if possible?
-
+# plot map --> make interactive if possible?
 ax = pnt.plot(figsize=(10, 6), alpha=0.5, color='red', marker='s', markersize=50)
 ax.set_title('Major Airports in South Africa', fontsize=16)
 ax.set_xlabel('Longitude', fontsize=12)
@@ -46,9 +42,6 @@ for i, row in major_sa_airports.iterrows():
     plt.annotate(row['Name'], xy=(row['Longitude'], row['Latitude']), xytext=(5, 5), textcoords='offset points', fontsize=8, fontweight='bold')
 ctx.add_basemap(ax, crs=pnt.crs.to_string(), source=ctx.providers.Stamen.TonerLite)
 st.pyplot(ax.get_figure())
-
-###
-
 
 #update routes table
 routes.columns = ['0', '1', 'Source IATA', '3', 'Destination IATA', '5', '6', '7', '8']
@@ -96,7 +89,7 @@ chart = alt.Chart(chart_data).mark_bar().encode(
 )
 st.altair_chart(chart)
 
-# Dictionary mapping cities to provinces
+#map cities to provinces
 province_dict = {
     'Johannesburg': 'Gauteng',
     'Lanseria': 'Gauteng',
@@ -108,17 +101,17 @@ province_dict = {
     'George': 'Western Cape'
 }
 
-# Create a list of provinces for each city in the 'city' column
+#create list of provinces for each city
 provinces = [province_dict.get(city, 'Unknown') for city in total_counts['City']]
 
-# Add the 'province' column to the dataframe
+#add the 'province' column to the dataframe
 total_counts['Province'] = provinces
 
-# Group the total_counts dataframe by province and sum the counts
+#group the total_counts dataframe by province and sum the counts
 province_counts = total_counts.groupby('Province')['Count'].sum().reset_index()
 province_counts = province_counts.sort_values('Count', ascending=False)
 
-# Create pie chart with Altair
+#create pie chart with altair
 pie_chart = alt.Chart(province_counts).mark_arc().encode(
     theta='Count:Q',
     color=alt.Color('Province:N', legend=alt.Legend(title='Provinces'), sort=alt.EncodingSortField(field='Count', op='sum', order='descending')), #that's not working...
@@ -135,10 +128,10 @@ pie_chart = alt.Chart(province_counts).mark_arc().encode(
     }
 )
 
-# Display pie chart in Streamlit
+#display pie chart in Streamlit
 st.altair_chart(pie_chart)
 
-# Create a paragraph of text using Markdown syntax
+#explain Lanseria
 text = """
 As can be seen in the pie chart, Gauteng makes up almost two thirds of all airline routes available in South Africa.
 The vast majority of these routes are provided by the OR Tambo International Airport,
