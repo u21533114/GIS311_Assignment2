@@ -75,7 +75,7 @@ total_counts['Airport'] = ['OR Tambo International Airport', 'Cape Town Internat
 
 # make cities selectable
 city_options = ['All'] + list(total_counts['City'])
-selected_cities = st.multiselect('Filter cities', city_options)
+selected_cities = st.multiselect('Filter cities', city_options, default=['All'])
 
 if 'All' in selected_cities:
     chart_data = total_counts
