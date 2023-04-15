@@ -111,7 +111,7 @@ province_counts['Percentage'] = round(province_counts['Count']/province_counts['
 #create pie chart with altair
 pie_chart = alt.Chart(province_counts).mark_arc().encode(
     theta='Percentage:Q',
-    color=alt.Color('Province:N', legend=alt.Legend(title='Provinces'), #sort=alt.EncodingSortField(field='Count', op='sum', order='descending')),
+    color=alt.Color('Province:N', legend=alt.Legend(title='Provinces')), #sort=alt.EncodingSortField(field='Count', op='sum', order='descending')),
     tooltip=['Province:N', 'Percentage:Q']
 ).properties(
     width=600,
