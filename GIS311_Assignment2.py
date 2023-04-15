@@ -76,6 +76,10 @@ total_counts['Airport'] = ['OR Tambo International Airport', 'Cape Town Internat
 #make cities selectable
 city_options = ['All'] + list(total_counts['City'])
 selected_city = st.multiselect('Filter cities', city_options)
+if 'All' in selected_cities:
+    chart_data = total_counts
+else:
+    chart_data = total_counts[total_counts['City'].isin(selected_cities)]
 
 chart = alt.Chart(total_counts).mark_bar().encode(
     x=alt.X('City:N', axis=alt.Axis(title='City', labelAngle=0)),
