@@ -125,3 +125,15 @@ pie_chart = alt.Chart(province_counts).mark_arc().encode(
 
 # Display pie chart in Streamlit
 st.altair_chart(pie_chart)
+
+# Create a paragraph of text using Markdown syntax
+text = """
+As can be seen in the pie chart, Gauteng makes up almost two thirds of all airline routes available in South Afrca.
+The vast majority of these routes are provided by the OR Tambo International Airport,
+with only a small number of routes available from Lanseria Airport - which is planning to reach 40 million passengers by 2050 (Lanseria, 2023).
+With such a high volume of routes coming from Gauteng,
+it makes sense for these routes to be distributed more evenly between OR Tambo International Airport and Lanseria Airport.
+_________________________________________________________________________________________________________________________
+Reference: (Lanseria, 2023) accessed from https://lanseria.co.za/corporate/airport-development/ on 15/04/2023
+"""
+st.markdown(text)
