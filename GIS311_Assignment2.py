@@ -137,6 +137,7 @@ with only a small number of routes available from Lanseria Airport - which is pl
 With such a high volume of routes coming from Gauteng,
 it makes sense for these routes to be distributed more evenly between OR Tambo International Airport and Lanseria Airport.
 _________________________________________________________________________________________________________________________
-Reference: (Lanseria, 2023) accessed from https://lanseria.co.za/corporate/airport-development/ on 15/04/2023
 """
 st.markdown(text)
+st.write('Reference: (Lanseria, 2023) accessed from https://lanseria.co.za/corporate/airport-development/ on 15/04/2023')
+st.write('Created by Brett Harzon (u21533114) for GIS 311 at the University of Pretoria.')
