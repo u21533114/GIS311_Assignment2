@@ -14,7 +14,8 @@ import altair as alt
 This data was aquired from [OpenFlights](https://openflights.org/data.html)
 _____________________________________________________________________________
 Should Lanseria Airport focus on its expansion plans? 
-""" checkbox_value = st.checkbox('YES', value=True, key='my_checkbox')
+"""
+checkbox_value = st.checkbox('YES', value=True, key='my_checkbox')
 
 #import data
 airlines = pd.read_csv('airlines.dat', header = None)
