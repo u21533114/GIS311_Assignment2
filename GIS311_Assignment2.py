@@ -130,7 +130,7 @@ st.altair_chart(pie_chart)
 
 #explain Lanseria
 text = """
-As can be seen in the pie chart, Gauteng makes up almost two thirds of all airline routes available in South Africa.
+As can be seen in the pie chart, Gauteng makes up over 65% of all airline routes available in South Africa.
 The vast majority of these routes are provided by the OR Tambo International Airport,
 with only a small number of routes available from Lanseria Airport - which is planning to reach 40 million passengers by 2050 (Lanseria, 2023).
 With such a high volume of routes coming from Gauteng,
