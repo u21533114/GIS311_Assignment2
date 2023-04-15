@@ -15,7 +15,7 @@ This data was aquired from [OpenFlights](https://openflights.org/data.html)
 _____________________________________________________________________________
 Should Lanseria Airport focus on its expansion plans? 
 """
-checkbox_value = True
+checkbox_value = st.checkbox(value=True)
 checkbox_placeholder = st.empty()
 
 if checkbox_value:
