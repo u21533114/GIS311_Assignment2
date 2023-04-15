@@ -12,8 +12,12 @@ import altair as alt
 """
 # South African Flight Data Analysis
 This data was aquired from [OpenFlights](https://openflights.org/data.html)
+_____________________________________________________________________________
+Should Lanseria Airport focus on its expansion plans? 
 """
+checkbox_value = st.checkbox('Checkbox ' + 'YES', value=True)
 
+#import data
 airlines = pd.read_csv('airlines.dat', header = None)
 airports = pd.read_csv('airports.dat', header = None)
 countries = pd.read_csv('countries.dat', header = None)
