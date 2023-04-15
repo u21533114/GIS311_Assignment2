@@ -106,13 +106,14 @@ total_counts['Province'] = provinces
 #group the total_counts dataframe by province and sum the counts
 province_counts = total_counts.groupby('Province')['Count'].sum().reset_index()
 province_counts = province_counts.sort_values('Count', ascending=False)
-province_counts['Percentage'] = round(province_counts['Count']/province_counts['Count'].sum()*100, 3)
+province_counts['Percentage'] = round(province_counts['Count']/province_counts['Count'].sum()*100, 2)
 
 #create pie chart with altair
 pie_chart = alt.Chart(province_counts).mark_arc().encode(
     theta='Percentage:Q',
     color=alt.Color('Province:N', legend=alt.Legend(title='Provinces'), sort=alt.EncodingSortField(field='Count', op='sum', order='descending')), #that's not working...
-    tooltip=['Province:N', 'Percentage:Q']
+    tooltip=[alt.Tooltip('Province:N', title='Province'), alt.Tooltip('Percentage:Q', title='Percentage', format='.2f') + '%']
+
 ).properties(
     width=600,
     height=400,
