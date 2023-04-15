@@ -112,8 +112,7 @@ province_counts['Percentage'] = round(province_counts['Count']/province_counts['
 pie_chart = alt.Chart(province_counts).mark_arc().encode(
     theta='Percentage:Q',
     color=alt.Color('Province:N', legend=alt.Legend(title='Provinces'), sort=alt.EncodingSortField(field='Count', op='sum', order='descending')), #that's not working...
-    tooltip=[alt.Tooltip('Province:N', title='Province'), alt.Tooltip('Percentage:Q', title='Percentage', format='.2f') + '%']
-
+    tooltip=['Province:N', 'Percentage:Q']
 ).properties(
     width=600,
     height=400,
