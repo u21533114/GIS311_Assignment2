@@ -81,7 +81,7 @@ if 'All' in selected_cities:
 else:
     chart_data = total_counts[total_counts['City'].isin(selected_cities)]
 
-chart = alt.Chart(total_counts).mark_bar().encode(
+chart = alt.Chart(chart_data).mark_bar().encode(
     x=alt.X('City:N', axis=alt.Axis(title='City', labelAngle=0)),
     y=alt.Y('Count:Q', axis=alt.Axis(title='Count')),
     tooltip=[alt.Tooltip('City:N', title='City'), alt.Tooltip('Airport:N', title='Airport'), alt.Tooltip('Count:Q', title='Count')]
