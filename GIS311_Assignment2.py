@@ -73,6 +73,10 @@ total_counts = total_counts.reset_index()
 total_counts.columns = ['City', 'Count']
 total_counts['Airport'] = ['OR Tambo International Airport', 'Cape Town International Airport','King Shaka International Airport', 'Port Elizabeth Airport','East London Airport', 'George Airport', 'Bram Fischer Airport','Lanseria Airport']
 
+#make cities selectable
+city_options = ['All'] + list(total_counts['City'])
+selected_city = st.multiselect('Filter cities', city_options)
+
 chart = alt.Chart(total_counts).mark_bar().encode(
     x=alt.X('City:N', axis=alt.Axis(title='City', labelAngle=0)),
     y=alt.Y('Count:Q', axis=alt.Axis(title='Count')),
@@ -128,7 +132,7 @@ st.altair_chart(pie_chart)
 
 # Create a paragraph of text using Markdown syntax
 text = """
-As can be seen in the pie chart, Gauteng makes up almost two thirds of all airline routes available in South Afrca.
+As can be seen in the pie chart, Gauteng makes up almost two thirds of all airline routes available in South Africa.
 The vast majority of these routes are provided by the OR Tambo International Airport,
 with only a small number of routes available from Lanseria Airport - which is planning to reach 40 million passengers by 2050 (Lanseria, 2023).
 With such a high volume of routes coming from Gauteng,
