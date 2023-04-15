@@ -11,7 +11,6 @@ import altair as alt
 st.write("# South African Flight Data Analysis")
 st.write("This data was acquired from [OpenFlights](https://openflights.org/data.html)")
 st.write("Should Lanseria Airport focus on its expansion plans?")
-st.write("_____________________________________________________________________________")
 
 #import data
 airlines = pd.read_csv('airlines.dat', header = None)
