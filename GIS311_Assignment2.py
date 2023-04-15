@@ -91,17 +91,8 @@ chart = alt.Chart(chart_data).mark_bar().encode(
     width=600,
     height=400
 )
-#st.altair_chart(chart)
-# Create a container and place it in the top right corner
-container = st.beta_container()
-container.column_widths = [3, 1]  # set the column widths to 3/4 and 1/4 of the page
-container.position = 'absolute'  # set the position to absolute
-container.top = 0  # set the top position to 0 pixels
-container.right = 0  # set the right position to 0 pixels
+st.altair_chart(chart)
 
-# Add the chart to the container
-with container:
-    st.write(chart)
 # Dictionary mapping cities to provinces
 province_dict = {
     'Johannesburg': 'Gauteng',
