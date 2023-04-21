@@ -14,7 +14,7 @@ st.write('# South African Flight Data Analysis')
 st.write('This data was acquired from [OpenFlights](https://openflights.org/data.html)')
 st.write('Should Lanseria Airport focus on its expansion plans?')
 st.write('____________________________________________________________________________')
-st.write('# Major airports in South Africa')
+st.write('## Major airports in South Africa')
 
 
 #import data
