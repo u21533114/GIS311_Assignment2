@@ -12,8 +12,10 @@ from streamlit_folium import folium_static
 
 st.write('# South African Flight Data Analysis')
 st.write('This data was acquired from [OpenFlights](https://openflights.org/data.html)')
-st.write('____________________________________________________________________________')
 st.write('Should Lanseria Airport focus on its expansion plans?')
+st.write('____________________________________________________________________________')
+st.write('# Major airports in South Africa')
+
 
 #import data
 airlines = pd.read_csv('airlines.dat', header = None)
