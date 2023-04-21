@@ -38,12 +38,10 @@ def create_map():
     # Create a map centered on South Africa
     map_sa = folium.Map(location=[-28.4793, 24.6727], zoom_start=5)
     # Add markers for major airports
-    for i, row in major_sa_airports.iterrows():
+    for i, row in pnt.iterrows():
         folium.Marker(location=[row['Latitude'], row['Longitude']], tooltip=row['Name']).add_to(map_sa)
     # Return the map
     return map_sa
-# Load the data for major airports in South Africa
-major_sa_airports = ...
 # Create the map
 map_sa = create_map()
 # Display the map in Streamlit
