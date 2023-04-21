@@ -45,7 +45,8 @@ def create_map():
 # Create the map
 map_sa = create_map()
 # Display the map in Streamlit
-st.markdown(map_sa._repr_html_(), unsafe_allow_html=True)
+map_html = map_sa._repr_html_()
+st.markdown(map_html, unsafe_allow_html=True)
 
 ###
 
