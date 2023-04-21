@@ -4,7 +4,6 @@ import streamlit as st
 import numpy as np
 import geopandas as gpd
 import matplotlib.pyplot as plt
-#import contextily as ctx
 import altair as alt
 import folium
 from streamlit_folium import folium_static
