@@ -5,4 +5,4 @@ streamlit
 matplotlib
 contextily
 altair
-streamlit-folium
+streamlit_folium
