@@ -3,6 +3,5 @@ pandas
 numpy
 streamlit
 matplotlib
-contextily
 altair
 folium
