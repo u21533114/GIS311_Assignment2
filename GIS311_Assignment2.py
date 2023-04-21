@@ -30,15 +30,18 @@ major_sa_airports = sa_airports[sa_airports['IATA Code'].isin(iata_codes)]
 pnt = gpd.GeoDataFrame(major_sa_airports, geometry = gpd.points_from_xy(major_sa_airports['Longitude'], major_sa_airports['Latitude']))
 pnt = pnt.set_crs('EPSG:4326')
 
-# plot map --> make interactive if possible?
-ax = pnt.plot(figsize=(10, 6), alpha=0.5, color='red', marker='s', markersize=50)
-ax.set_title('Major Airports in South Africa', fontsize=16)
-ax.set_xlabel('Longitude', fontsize=12)
-ax.set_ylabel('Latitude', fontsize=12)
+###
+
+import folium
+# Create a map centered on South Africa
+map_sa = folium.Map(location=[-28.4793, 24.6727], zoom_start=5)
+# Add markers for major airports
 for i, row in major_sa_airports.iterrows():
-    plt.annotate(row['Name'], xy=(row['Longitude'], row['Latitude']), xytext=(5, 5), textcoords='offset points', fontsize=8, fontweight='bold')
-ctx.add_basemap(ax, crs=pnt.crs.to_string(), source=ctx.providers.Stamen.TonerLite)
-st.pyplot(ax.get_figure())
+    folium.Marker(location=[row['Latitude'], row['Longitude']], tooltip=row['Name']).add_to(map_sa)
+# Display the map
+map_sa
+
+###
 
 #update routes table
 routes.columns = ['0', '1', 'Source IATA', '3', 'Destination IATA', '5', '6', '7', '8']
