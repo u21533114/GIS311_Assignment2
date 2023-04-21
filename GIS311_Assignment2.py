@@ -33,13 +33,21 @@ pnt = pnt.set_crs('EPSG:4326')
 ###
 
 import folium
-# Create a map centered on South Africa
-map_sa = folium.Map(location=[-28.4793, 24.6727], zoom_start=5)
-# Add markers for major airports
-for i, row in major_sa_airports.iterrows():
-    folium.Marker(location=[row['Latitude'], row['Longitude']], tooltip=row['Name']).add_to(map_sa)
-# Display the map
-map_sa
+# Define a function to create the map
+def create_map():
+    # Create a map centered on South Africa
+    map_sa = folium.Map(location=[-28.4793, 24.6727], zoom_start=5)
+    # Add markers for major airports
+    for i, row in major_sa_airports.iterrows():
+        folium.Marker(location=[row['Latitude'], row['Longitude']], tooltip=row['Name']).add_to(map_sa)
+    # Return the map
+    return map_sa
+# Load the data for major airports in South Africa
+major_sa_airports = ...
+# Create the map
+map_sa = create_map()
+# Display the map in Streamlit
+st.markdown(map_sa._repr_html_(), unsafe_allow_html=True)
 
 ###
 
