@@ -33,6 +33,7 @@ pnt = pnt.set_crs('EPSG:4326')
 ###
 
 import folium
+from streamlit_folium import folium_static
 def create_map():
     # Create a map centered on South Africa
     map_sa = folium.Map(location=[-28.4793, 24.6727], zoom_start=5)
@@ -44,7 +45,7 @@ def create_map():
 # Create the map
 map_sa = create_map()
 # Display the map in Streamlit
-folium(map_sa)
+folium_static(map_sa)
 
 ###
 
