@@ -6,6 +6,8 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 import contextily as ctx
 import altair as alt
+import folium
+from streamlit_folium import folium_static
 #NB: 1 map and two charts are needed
 
 st.write('# South African Flight Data Analysis')
@@ -30,24 +32,14 @@ major_sa_airports = sa_airports[sa_airports['IATA Code'].isin(iata_codes)]
 pnt = gpd.GeoDataFrame(major_sa_airports, geometry = gpd.points_from_xy(major_sa_airports['Longitude'], major_sa_airports['Latitude']))
 pnt = pnt.set_crs('EPSG:4326')
 
-###
-
-import folium
-from streamlit_folium import folium_static
+#create map
 def create_map():
-    # Create a map centered on South Africa
     map_sa = folium.Map(location=[-28.4793, 24.6727], zoom_start=5)
-    # Add markers for major airports
     for i, row in pnt.iterrows():
         folium.Marker(location=[row['Latitude'], row['Longitude']], tooltip=row['Name']).add_to(map_sa)
-    # Return the map
     return map_sa
-# Create the map
 map_sa = create_map()
-# Display the map in Streamlit
 folium_static(map_sa)
-
-###
 
 #update routes table
 routes.columns = ['0', '1', 'Source IATA', '3', 'Destination IATA', '5', '6', '7', '8']
